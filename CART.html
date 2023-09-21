@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+      .main{
+        display: flex;
+        gap: 10px;
+        background-color: #CDFCF6;
+        height: 1000px;
+      }
+      .d1{
+        width: 50%;height: 250px;
+      }
+      .d2{
+        width: 50%;height: 250px;
+      }
+      .d3{
+        width: 50%;height: 250px;
+      }
+      .d4{
+        width: 50%;height: 250px;
+      }
+      .im4 {
+        height: 200px ;
+      }
+      .im3{
+        height: 200px;
+      }
+      .im2{
+        height: 200px;
+      }
+      .im1{
+        height: 200px;
+      }
+      .hide{
+        margin-left: 350px;
+        background-color: antiquewhite;
+        height: 30px;width: 30px;
+        align-content: center;
+      }
+      .output{
+        background-color: burlywood;
+        width: 750px;height: 500px;
+        display: flex;
+        overflow: auto;
+      }
+      .d1, .d2, .d3, .d4{
+        background-color: #98A8F8;
+      }
+    </style>
+</head>
+<body>
+    <div class="main">
+    <div class="d1 card" style="width: 18rem;" id="C1">
+    <img src="https://m.media-amazon.com/images/I/61V5HLOJhTL._AC_UL600_FMwebp_QL65_.jpg" class="im im1 card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="watch card-title">WATCH</h5><br>
+    <button id="b1" class="btn btn-primary">ADD to Cart</button>
+  </div>
+  </div>
+  <div class="d2 card" style="width: 18rem;" id="C2">
+    <img src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/24508570/2023/8/16/fd802011-4755-4aeb-819f-538aaebfda1416921528423064-packbracelets1.jpg" class="im im2 card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="Bracelet card-title">BRACELET</h5><br>
+    <button id="b2" class="btn btn-primary">ADD to Cart</button>
+  </div>
+  </div>
+  <div class="d3 card" style="width: 18rem;" id="C3">
+    <img src="https://images.cltstatic.com/media/product/350/AL00565-SS0000-infinite-joy-necklace-in-rhodium-plated--silver-prd-1-base.jpg" class="im im3 card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="Chain card-title">CHAIN</h5><br>
+    <button id="b3" class="btn btn-primary">ADD to Cart</button>
+  </div>
+</div>
+<div class="d4 card" style="width: 18rem;" id="C4">
+  <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSYpuna0k9bam55HNvKFo_ATfQSVLnF7b_U2wV8A0SAV7D3NODtPu2UfpsZ24A8tx-y_Vx-6J8Ip4ZBkyjoLT2x2ARKyr35gQJDSDx4-4SW6-uQQdbBV4FvKQCEMIpjOmPFc1Q1-E0&usqp=CAc" class="im im4 card-img-top" alt="...">
+  <div class="card-body">
+  <h5 class="Trimmer card-title">TRIMMER</h5><br>
+  <button id="b4" class="btn btn-primary">ADD to Cart</button>
+</div>
+</div>
+<div class="hide">
+  <i class="fa-solid fa-cart-shopping"></i>
+</div>
+  <div class="output">
+
+  </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+<script>
+  let cart={}
+  let count=0
+  let out=document.getElementsByClassName('output')[0]
+  document.getElementsByClassName('output')[0].style.display="none"
+ let hide= document.getElementsByClassName('hide')[0]
+ 
+ let c2=document.getElementsByClassName('im2')[0]
+ let c3=document.getElementsByClassName('im3')[0]
+ let b1=document.getElementById('b1')
+ let b2=document.getElementById('b2')
+ let b3=document.getElementById('b3')
+ let n1=document.getElementsByTagName('h5')[0]
+ let n2=document.getElementsByTagName('h5')[1]
+ let n3=document.getElementsByTagName('h5')[2]
+ hide.addEventListener("click",hidden)
+ b1.addEventListener("click",b1f)
+ b2.addEventListener("click",b2f)
+ b3.addEventListener("click",b3f)
+ function b1f(){
+  let name=document.getElementsByClassName('watch')[0].innerHTML
+  let img=document.getElementsByClassName('im1')[0].getAttribute('src')
+  let product1=document.createElement('div')
+  product1.innerHTML=`<h5>${name}</h5><br>
+  <img src="${img}" style="height:250px"></img>`
+  out.appendChild(product1)
+ }
+ function b2f(){
+  let name2=document.getElementsByClassName('Bracelet')[0].innerHTML
+  let img2=document.getElementsByClassName('im2')[0].getAttribute('src')
+  let product2=document.createElement('div')
+  product2.innerHTML=`<h5>${name2}</h5><br>
+  <img src="${img2}" style="height:250px"></img>`
+  out.appendChild(product2)
+ }
+ function b3f(){
+  let name3=document.getElementsByClassName('Chain')[0].innerHTML
+  let img3=document.getElementsByClassName('im3')[0].getAttribute('src')
+  let product3=document.createElement('div')
+  product3.innerHTML=`<h5>${name3}</h5><br>
+  <img src="${img3}" style="height:250px"></img>`
+  out.appendChild(product3)
+ }
+function hidden(){
+  document.getElementsByClassName('output')[0].style.display="block"
+  count++
+  if((count%2)===0){
+  document.getElementsByClassName('output')[0].style.display="none"
+}
+}
+
+
+</script>
+</html>
