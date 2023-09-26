@@ -5,7 +5,7 @@ $qu="select * from producttable where Name LIKE '$name%'";
 $sq=mysqli_query($data,$qu);
 if($name!=null){
     if(mysqli_num_rows($sq)>0){
-echo "<table class='table table-dark'>
+echo "<table class='table table-success'>
     <thead>
      <tr>
           <th>id</th>

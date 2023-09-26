@@ -10,10 +10,14 @@
             justify-content: center;
         }
         .container{
-            background-color: coral;
+          background-color: #ffbf69;
             width: 40%;
-            height: 300px;
+            height: 340px;
             padding: 20px;
+            border-radius: 40px;
+        }
+        .container:hover{
+          box-shadow: 0px 0px 10px 10px #2196F3;
         }
         .form{
             margin-top: 20px;
@@ -86,10 +90,10 @@ input:checked + .slider:before {
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
         <div class="form productname">
-            <input type="text" name="pname" >
+            <input type="text" name="pname" placeholder="Enter Product name">
         </div>
         <div class="form productdesc">
-            <textarea type="text" name="pdesc" ></textarea>
+            <textarea type="text" name="pdesc" placeholder="Enter Product Description"></textarea>
         </div>
         <div class="form productstock">
             <label class="switch">
@@ -98,13 +102,13 @@ input:checked + .slider:before {
             </label>
         </div>
         <div class="form productprice">
-            <input type="text" name="price" >
+            <input type="text" name="price" placeholder="Enter Product Price">
         </div>
         <div class="form productimg">
             <input type="file" name="file" >
         </div>
         <div class="form productquantity">
-            <input type="number" name="pquant" >
+            <input type="number" name="pquant" placeholder="Enter Product Quantity" >
         </div>
         <div class="form submit">
             <input type="submit" name="sub" >
@@ -146,7 +150,7 @@ $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 if(in_array($fileType, array('jpg','png','jpeg','gif','webp'))){
     echo "gud";
 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-$insert = mysqli_query($data,"INSERT INTO `producttable`(Name,Description,stock,Price,image,Quantity) VALUES ('".$name."','".$desc."','".$check."','".$price."', '".$fileName."','".$quant."')");
+$insert = mysqli_query($data,"INSERT INTO `producttable`(Name,Description,stock,Price,image,Quantity,Last_Modified) VALUES ('".$name."','".$desc."','".$check."','".$price."', '".$fileName."','".$quant."','".$_SESSION['Name']."')");
 if($insert){
 $outMessageorError = "The file ".$fileName. " has been uploaded successfully.";
 }else{

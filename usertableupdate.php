@@ -11,7 +11,7 @@
     }
     .main{
         background-color: #AFD3E2;
-        width: 25%;height: 250px;
+        width: 25%;height: 300px;
     }
     h3{
         text-align: center;
@@ -29,6 +29,10 @@
         padding-left: 60px;
     }
     .pass1{
+        margin-top: 10px;
+        padding-left: 60px;
+    }
+    .img{
         margin-top: 10px;
         padding-left: 60px;
     }
@@ -53,8 +57,7 @@
 <body>
     <div class="center">
     <div class="main">
-        <form action="usertableupdate.php" method="post">
-
+        <form action="" method="post" enctype="multipart/form-data">
         <div class="login">
             <h3>UPDATE DETAILS</h3>
                 <div class="form user1"><input type="text" name="name"  value="<?php echo $_GET['Name']?>" required >
@@ -62,15 +65,15 @@
                 <div class="form phone">
                     <input type="number" name="Mobile" value="<?php echo $_GET['Mobile']?>" required >
                 </div>
-                <input type="file" name="file" >
+                <div class="form img">
+                <input type="file" name="file"  required>
+                </div>
                 <div class="form mail">
                     <input type="Email" name="mail" value="<?php echo $_GET['Email']?>"  required >
                 </div>
                 <div class="form pass1">
                 <input type="password" name="pass" value="<?php echo $_GET['Password']?>"  required >
                 </div>
-                <?php echo"  <input type='hidden' name='userid' value=". $_GET['userid'] ;?>>
-                <!-- <button type="submit" onclick="sana1()" class="submit">submit</button> -->
                 <div class="form submit">
                 <input type="submit" value="update" name="sub" >
                 </div>
@@ -100,14 +103,15 @@
 <?php
 include ('authen.php');
 if(isset($_POST['sub'])){
-$id=$_POST['userid'];
+    echo "asnda";
+$id=$_GET['userid'];
 $name=$_POST['name'];
 $pass=$_POST['pass'];
 $mobile=$_POST['Mobile'];
 $mail=$_POST['mail'];
 $tab='usertable';
 // mysqli_num_rows(mysqli_query($data,'selects * from sample'));
-    $targetDir = "images/";
+    $targetDir = "uimages/";
 // mysqli_num_rows(mysqli_query($data,'selects * from sample'));
 if(!empty($_FILES["file"]["name"])){
     echo "gudFVGGYDFFVD";
@@ -120,17 +124,22 @@ if(!empty($_FILES["file"]["name"])){
   if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
     echo "dai";
     // $update="UPDATE 'producttable' SET image='$fileName' where id=$id";
-    $mysq="UPDATE `producttable` SET Name='$name',Description='$pdesc',stock='$check',Price=$price,image='$fileName',Quantity=$quant
-    WHERE id=$id";
+    $mysq="UPDATE `usertable` SET Name='$name',Password='$pass',Mobile='$mobile',Email='$mail',image='$fileName'
+    WHERE userid=$id";
     $sq= mysqli_query($data,$mysq);
    if($sq){
     $outMessageorError = "The file ".$fileName. " has been updated successfully.";
+    header("location:adminutable.php");
    }
-    header("location:producttable.php");
+    header("location:adminutable.php");
 }
 else{
     echo "nooooooo";
 }
   }
-}}
+  else {
+    echo "pls select file to upload";
+}
+}
+}
 ?>

@@ -123,11 +123,13 @@ if(isset($_POST['submit'])){
             session_start();
             $_SESSION['id1']=mysqli_fetch_array(mysqli_query($data,"SELECT userid from `usertable` where Email ='$mail' and Password='$pass1'"))['userid'];
             $_SESSION['uname']=mysqli_fetch_array(mysqli_query($data,"SELECT Name from `usertable` where Email ='$mail' and Password='$pass1'"))['Name'];
-            $_SESSION['uimage']="<img src='"."images/".mysqli_fetch_array(mysqli_query($data,"SELECT image from `usertable` where Email ='$mail' and Password='$pass1'"))['image']."'>";
+            $_SESSION['uimage']="<img src='"."uimages/".mysqli_fetch_array(mysqli_query($data,"SELECT image from `usertable` where Email ='$mail' and Password='$pass1'"))['image']."'>";
             header("location:homepage.php");
         }
         else{
-            echo "Enter the crct password";
+            echo "<div class='alert alert-danger' role='alert'>
+            Enter the Correct Password!
+          </div>";
         }
     }
     }

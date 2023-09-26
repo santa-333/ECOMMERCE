@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     </script>
+    
 </head>
 <body>
     <form action="search.php" method="post" id="form">
@@ -38,12 +39,19 @@
 <head>
     <title>USER Database</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<style>
+        .t1{
+            background-color: lawngreen;
+        }
+        </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Product Details</h2>
         <a class="btn btn-info" href="productadd.php">ADD</a>
-        <table class='table table-dark'>
+        <a class="btn btn-info" href="adminbtns.php">Admin panel</a>
+        <table class='table table-light'>
 <thead>
  <tr>
       <th>Productid</th>
@@ -53,7 +61,8 @@
      <th>Stock</th>
      <th>Price</th>
      <th>Quantity</th>    
-     <th>CRUD</th>        
+     <th>CRUD</th>  
+     <th>Last Modified</th>      
 
  </tr>
 </thead>
@@ -79,8 +88,9 @@ while($w=mysqli_fetch_assoc($ref)){
     <td class="align-middle">'.$w['stock'].'</td>
     <td class="align-middle">'.$w['Price'].'</td>
     <td class="align-middle">'.$w['Quantity'].'</td>
-    <td class="align-middle"><a href="producttableupdate.php?id='.$w['id'].'&name='.$w['Name'].'&productdesc='.$w['Description'].'&quantity='.$w['Quantity'].'&price='.$w['Price'].'"" class="btn btn-warning">Edit</a>
+    <td class="align-middle"><a href="producttableupdate.php?id='.$w['id'].'&name='.$w['Name'].'&productdesc='.$w['Description'].'&quantity='.$w['Quantity'].'&price='.$w['Price'].'&image='.$w['image'].'"" class="btn btn-warning">Edit</a>
     <a href="deleteproduct.php?id='.$w['id'].'" class="btn btn-danger">Delete</a></td>
+    <td class="align-middle">'.$w['Last_Modified'].'</td>
     </tr>';
     $count++;
 }

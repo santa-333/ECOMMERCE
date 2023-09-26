@@ -45,6 +45,7 @@
     <div class="container">
         <h2>user Details</h2>
         <a class="btn btn-info" href="userregister.php">ADD</a>
+        <a class="btn btn-info" href="adminbtns.php">Admin panel</a>
         
 <table class="table table-dark">
     <thead>
@@ -77,7 +78,7 @@
                     <td class="align-middle"><?php echo $row['Mobile']; ?></td>
                     <td class="align-middle"><?php echo $row['Email']; ?></td>
                     <td class="align-middle"><?php echo $row['Password']; ?></td>
-                    <td class="align-middle"><img src="images/<?php echo $row['image'];?>" alt="" height="100px" width="100px"></td>
+                    <td class="align-middle"><img src="uimages/<?php echo $row['image'];?>" alt="" height="100px" width="100px"></td>
                     <td class="align-middle"><a class="btn btn-info" href="usertableupdate.php?userid=<?php echo $row['userid'].'&Name='.$row['Name'].'&Email='.$row['Email'].'&Password='.$row['Password'].'&Mobile='.$row['Mobile'] ;?>">Edit</a>
                      &nbsp;
                      <a class="btn btn-danger" href="deletetableuser.php?userid=<?php echo $row['userid']; ?>">Delete</a>

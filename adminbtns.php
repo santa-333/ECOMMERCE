@@ -129,7 +129,7 @@ if(isset($_POST['usubmit'])){
                 </div>
     </div>
     <div class="container">
-    <div class="but"><a  class="b1  b  btn btn-dark" href=""   type="submit" value="Orders" name="order">Orders</a></div>
+    <div class="but"><a  class="b1  b  btn btn-dark" href="ordertable.php"   type="submit" value="Orders" name="order">Orders</a></div>
     <div class="but"><a  class="b2  b  btn btn-dark" href="productTable.php"  type="submit" value="products" name="product">Products</a></div>
     <div class="but"><a  class="b3  b  btn btn-dark"href="adminutable.php"  type="submit" value="Customers" name="customer">Customers</a></div>
     <div class="but"><a  class="b4 b   btn btn-dark"href="adminregister.php"  type="submit" value="Add admin" name="admin">Add admin</a></div>

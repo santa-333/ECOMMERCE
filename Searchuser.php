@@ -12,7 +12,8 @@ echo "<table class='table table-dark'>
          <th>Name</th>
          <th>Mobile</th>
          <th>Email</th>
-         <th>Image</th>          
+         <th>Image</th>
+         <th>crud</th>          
      </tr>
     </thead>
     <tbody> ";
@@ -27,6 +28,10 @@ while($row=mysqli_fetch_array($sq)){
     <td>$row[Mobile]</td>
     <td>$row[Email]</td>
     <td><img src='images/$row[image]'height='100px' width='100px'><td>
+    <td class='align-middle'><a class='btn btn-info' href='usertableupdate.php?userid=<?php echo $row[userid].'&Name='.$row[Name].'&Email='.$row[Email].'&Password='.$row[Password].'&Mobile='.$row[Mobile] ;?>'>Edit</a>
+                     &nbsp;
+                     <a class='btn btn-danger' href='deletetableuser.php?userid=<?php echo $row[userid]; ?>'>Delete</a>
+                    </td>
 </tr>
 ";
 }echo "</tbody>

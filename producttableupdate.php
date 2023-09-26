@@ -10,10 +10,14 @@
             justify-content: center;
         }
         .container{
-            background-color: coral;
+            background-color: #ffbf69;
             width: 40%;
-            height: 300px;
+            height: 340px;
             padding: 20px;
+            border-radius: 40px;
+        }
+        .container:hover{
+          box-shadow: 0px 0px 10px 10px #2196F3;
         }
         .form{
             margin-top: 20px;
@@ -101,7 +105,7 @@ input:checked + .slider:before {
             <input type="text" name="price" value="<?php  echo $_GET['price'];?>" >
         </div>
         <div class="form productimg">
-            <input type="file" name="file" required>
+            <input type="file" name="file"  >
         </div>
         <div class="form productquantity">
             <input type="number" name="Quantity" value="<?php  echo $_GET['quantity'];?>">
@@ -117,6 +121,8 @@ input:checked + .slider:before {
 <?php
 include ('authen.php');
 if(isset($_POST['sub'])){
+  session_start();
+  $lname=$_SESSION['Name'];
 $id=$_GET['id'];
 $name=$_POST['pname'];
 $pdesc=$_POST['pdesc'];
@@ -142,7 +148,7 @@ if(!empty($_FILES["file"]["name"])){
   if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
       echo "dai";
     // $update="UPDATE 'producttable' SET image='$fileName' where id=$id";
-    $mysq="UPDATE `producttable` SET Name='$name',Description='$pdesc',stock='$check',Price=$price,image='$fileName',Quantity=$quant
+    $mysq="UPDATE `producttable` SET Name='$name',Description='$pdesc',stock='$check',Price=$price,image='$fileName',Quantity=$quant,Last_Modified='$lname'
     WHERE id=$id";
     $sq= mysqli_query($data,$mysq);
    if($sq){

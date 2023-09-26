@@ -39,12 +39,20 @@ if(isset($_POST['sub2'])){
         padding: 0px 25px 0px 25px;
         align-items: center;
     }
+    .sanlogo{
+        height: 100px;width: 100px;
+        border-radius: 50px;
+        box-shadow: 0px 0px 3px 3px #f28482;
+    }
     .logo{
         display: flex;
+        padding: 0px 20px 0px 20px;
     }
     .logo img{
         width: 100px;height: 100px;
         border-radius: 50px;
+        box-shadow: 0px 0px 3px 3px #f28482;
+        margin-top: 10px;
     }
     .inpu{
         padding: 35px 0px 0px 20px;
@@ -54,6 +62,14 @@ if(isset($_POST['sub2'])){
         background-color: transparent;
         box-shadow: 0px 0px 3px 3px #f28482;
         padding: 0px 5px 0px 5px;
+        margin: 0px 0px 30px 10px;
+    }
+    .inpu .check{
+        color: #f28482;
+        background-color: transparent;
+        box-shadow: 0px 0px 3px 3px #f28482;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 0px 20px 0px;
     }
     .im{
         height: 250px;width: 287px;
@@ -173,16 +189,25 @@ if(isset($_POST['sub2'])){
     <div class="head">
     <div class="header">
                 <div class="dp">
-                <h1>WElCOME <?php echo $_SESSION['uname'] ?></h1>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRadgu7ZE75Yhdhdu0DRCiJ_QO1QXMgIOZCw&usqp=CAU" class="sanlogo img-fluid" alt="..."  >
+                </div>
+                <div class="name">
+                <h1>WELCOME to SANTRA(\_/)</h1>
+                </div>
+                <div class="h1">
+                    <h3><?php echo $_SESSION['uname'] ?></h3>
                 </div>
                 <div class="logo">
                 <?php echo $_SESSION['uimage']; ?>
                 <div class="inpu">
                 <form method="post">
+                    <div >
                     <input type="submit" value="logout" name="usubmit" class="inp">
-                    <div><input type="submit" name="sub2" value=""></div>
+                    </div>
+                    <div >
+                    <input type="submit" name="sub2" value="Checkout" class="check">
+                    </div>
                 </form>
-                
                 </div>
                 </div>
                 </div>
@@ -203,7 +228,7 @@ if(isset($_POST['sub2'])){
             <p class="card-text">₹<?php echo $imag['Price']; ?></p>
             <form action="" method="post">
             <input type="number" step="1" class="inc" name="input">
-            <input class="but btn btn-primary" type="submit" name="sub" onclick="setTimeout(myFunction, 100);" value="Add to Cart">
+            <input class="but btn btn-primary" type="submit" name="sub3" onclick="setTimeout(myFunction, 100);" value="Add to Cart">
             <input type="hidden"  name="some" value="<?php echo $imag['id']; ?>">
             </form>
         </div>
@@ -212,11 +237,12 @@ if(isset($_POST['sub2'])){
     }
 ?>
  </div>
+ <a class="btn btn-info" href="usertableupdate.php?userid=<?php echo $row['userid'].'&Name='.$row['Name'].'&Email='.$row['Email'].'&Password='.$row['Password'].'&Mobile='.$row['Mobile'] ;?>">Edit</a>
 </body>
 </html>
 <?php
 include("authen.php");
-if(isset($_POST['sub'])){ 
+if(isset($_POST['sub3'])){ 
     if($_POST['input']>0){
 //     echo "<script>
 // function myFunction() {
@@ -232,25 +258,22 @@ if(isset($_POST['sub'])){
     $productid=$_POST['some'];
     $_SESSION['id']=mysqli_fetch_array(mysqli_query($data,"SELECT id from `producttable` where id ='$productid'"))['id'];
     echo $_SESSION['id'];
-    $sq="select * from `cart` where user_id='$userid'";
-    $psq="select * from `cart` where product_id='$productid'";
+    $sq="select * from `cart` where user_id='$userid' and product_id='$productid'";
     $sq2=mysqli_query($data,$sq);
-    $psq2=mysqli_query($data,$psq);
-    if((mysqli_num_rows($sq2)==0)and(mysqli_num_rows($psq2)==0)){
+    $w=mysqli_fetch_assoc($sq2);
+    if(mysqli_num_rows($sq2)==0){
     $somw="INSERT INTO `Cart` (Cartid,user_id,product_id,Quantity) VALUES ('$cart','$userid','$productid','$quant')";
     $mysq=mysqli_query($data,$somw);
     }
-    elseif((mysqli_num_rows($sq2)==0)or(mysqli_num_rows($psq2)==0)){
-        $som2="INSERT INTO `Cart` (Cartid,user_id,product_id,Quantity) VALUES ('$cart','$userid','$productid','$quant')";
-        $mysq4=mysqli_query($data,$som2);
-    }
-    else{
-        $mysq2="Update `Cart` set Quantity=$quant where product_id='$productid'";
+    else if(mysqli_num_rows($sq2)>0){
+        $quant3=$w['Quantity'];
+        $mysq2="Update `Cart` set Quantity=$quant+$quant3 where product_id='$productid' and user_id='$userid'";
         $mysq3=mysqli_query($data,$mysq2);
     }
-    }
-    if($mysq3){
-        echo "success";
+    // else{
+    //     $mysq2="Update `Cart` set Quantity=$quant where product_id='$productid' and user_id='$userid'";
+    //     $mysq3=mysqli_query($data,$mysq2);
+    // }
     }
 }
 

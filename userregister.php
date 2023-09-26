@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         .main{
             display: flex;
@@ -16,7 +18,7 @@
         }
         .form{
             background-color: #AFD3E2;
-            width: 25%;height: 250px;
+            width: 30%;height: 290px;
             border-radius: 40px;
        }
         h3{
@@ -83,6 +85,19 @@
             margin-left: 125px;
             background-color: #f9c784;
         }
+        .a1{
+            display: flex;
+            padding: 0px 0px 0px 0px;
+        }
+        .a1 a{
+            margin-top: 10px;
+            margin-left: 3px;
+            color: brown;
+        }
+        .msg{
+            margin-top: 20px;
+            width: 50%;
+        }
         </style>
 </head>
 <body>
@@ -116,7 +131,8 @@
     <div class="userimg">
         <input type="file" name="file" required>
     </div>
-    <div>
+    <div class="a1">
+        <a href="userlogin.php">Already a user</a>
         <input type="submit" class="submit" name="sub" value="submit">
     </div>
         </div>
@@ -138,21 +154,18 @@ if(isset($_POST['sub'])){
     $mail1=0;
     $sqmail=mysqli_query($data,"Select Email FROM `usertable` WHERE Email = '$mail'");
     if(mysqli_num_rows($sqmail)>0){
-    $mail1++;
-    if($mail1>0){
     $out="Mail id already exist Pls login";
-        }
     }
-else{
+    else{
     $outMessageorError = '';
-    $targetDir = "images/";
+    $targetDir = "uimages/";
     if(!empty($_FILES["file"]["name"])){
       echo "gudFVGGYDFFVD";
     // $fileName = basename($_FILES["file"]["name"]);
     $fileName = rand(1000,10000)."-".$_FILES["file"]["name"];
     $targetFilePath = $targetDir . $fileName;
     $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-    if(in_array($fileType, array('jpg','png','jpeg','gif'))){
+    if(in_array($fileType, array('jpg','png','jpeg','gif','webp'))){
         echo "gud";
     if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
     $insert = mysqli_query($data,"INSERT INTO `usertable`(Name,Mobile,Email,image,Password) VALUES ('".$name."','".$mobile."','".$mail."','".$fileName."','".$pass."')");
@@ -171,5 +184,8 @@ else{
     echo$outMessageorError;
     header("location:userlogin.php");
     }
+    echo "<div class='msg alert alert-danger' role='alert'>
+    Mail Id Already exist!  Pls login...
+    </div>";
     }
     ?>
